@@ -113,10 +113,10 @@ app.all("*",(req,res,next)=>{  //this response will be send to all routes //if a
 });
 
 // MIDDLEWARE OF ANY ERROR
-// app.use((err,req,res,next)=>{
-//     let {statuscode=500,message="something went wrong"}=err;
-//     res.status(statuscode).render("listings/error.ejs",{err})
-// })
+app.use((err,req,res,next)=>{
+    let {statuscode=500,message="something went wrong"}=err;
+    res.status(statuscode).render("listings/error.ejs",{err})
+})
 
 app.listen(1414,()=>{
     console.log("listening to port 1414");

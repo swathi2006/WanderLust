@@ -24,7 +24,7 @@ const passport=require("passport")
 const LocalStrategy=require("passport-local"); 
 const User=require("./models/user.js");
 const userrouter=require("./routes/user.js");
-const Listing=require("../models/listing.js");
+const Listing=require("./models/listing.js");
 
 
 

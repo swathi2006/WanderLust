@@ -24,6 +24,8 @@ const passport=require("passport")
 const LocalStrategy=require("passport-local"); 
 const User=require("./models/user.js");
 const userrouter=require("./routes/user.js");
+const Listing=require("../models/listing.js");
+
 
 
 app.use(methodOverride("_method"));
@@ -103,7 +105,10 @@ app.use((req,res,next)=>{
 app.use("/listings",listingrouter);  // wherever /listings is used ,listing.js is triggered
 app.use("/listings/:id/reviews",reviewrouter); 
 app.use("/",userrouter);
-
+app.get("/",(req,res)=>{
+  const allListings = await Listing.find({});
+       res.render("listings/index.ejs",{allListings})
+})
 
 
 

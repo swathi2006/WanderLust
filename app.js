@@ -108,9 +108,9 @@ app.use("/",userrouter);
 
 
 //MIDDLEWARE IF NO ROUTES MATCHED ABOVE ROUTES ENTERED BY USER IN SERVER SIDE
-app.all("*",(req,res,next)=>{  //this response will be send to all routes //if a given route is not matched with above routes then this will be printed
-   next(new ExpressError(404,"page not found"))
-});
+// app.all("*",(req,res,next)=>{  //this response will be send to all routes //if a given route is not matched with above routes then this will be printed
+//    next(new ExpressError(404,"page not found"))
+// });
 
 // // MIDDLEWARE OF ANY ERROR
 app.use((err,req,res,next)=>{

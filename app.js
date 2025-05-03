@@ -42,19 +42,19 @@ main().then(()=>{
     console.log(err);
 });
 async function main(){
-    await mongoose.connect('mongodb://127.0.0.1:27017/wanderLust');
-    // await mongoose.connect(process.env.ATLASDB_URL)
+   
+    await mongoose.connect(process.env.ATLASDB_URL)
 }
 
 
 
 
-const store=MongoStore.create({
-    mongoUrl : "mongodb://127.0.0.1:27017/wanderLust",  // all information stored in this url (mongodbatlas)
-    crypto: {  // to store sensitive information we use encryption
+const store = MongoStore.create({
+    mongoUrl: process.env.ATLASDB_URL ,
+    crypto: {
         secret: process.env.SECRET,
     },
-    touchAfter : 24*3600, // session update
+    touchAfter: 24 * 3600,
 });
 
 store.on("error", ()=>{
@@ -108,15 +108,15 @@ app.use("/",userrouter);
 
 
 //MIDDLEWARE IF NO ROUTES MATCHED ABOVE ROUTES ENTERED BY USER IN SERVER SIDE
-// app.all("*",(req,res,next)=>{  //this response will be send to all routes //if a given route is not matched with above routes then this will be printed
-//    next(new ExpressError(404,"page not found"))
-// });
+app.all("*",(req,res,next)=>{  //this response will be send to all routes //if a given route is not matched with above routes then this will be printed
+   next(new ExpressError(404,"page not found"))
+});
 
 // // MIDDLEWARE OF ANY ERROR
-// app.use((err,req,res,next)=>{
-//     let {statuscode=500,message="something went wrong"}=err;
-//     res.status(statuscode).render("listings/error.ejs",{err})
-// })
+app.use((err,req,res,next)=>{
+    let {statuscode=500,message="something went wrong"}=err;
+    res.status(statuscode).render("listings/error.ejs",{err})
+})
 
 app.listen(1414,()=>{
     console.log("listening to port 1414");

@@ -105,7 +105,7 @@ app.use((req,res,next)=>{
 app.use("/listings",listingrouter);  // wherever /listings is used ,listing.js is triggered
 app.use("/listings/:id/reviews",reviewrouter); 
 app.use("/",userrouter);
-app.get("/",(req,res)=>{
+app.get("/",async(req,res)=>{
   const allListings = await Listing.find({});
        res.render("listings/index.ejs",{allListings})
 })
